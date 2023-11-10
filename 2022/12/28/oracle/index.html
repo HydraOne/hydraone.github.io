@@ -1,0 +1,775 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/%5Bobject%20Object%5D">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="开高达の汽车人">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="视图 创建或修改视图语法 1234CREATE [OR REPLACE] [FORCE] VIEW view_name AS subquery [WITH CHECK OPTION ] [WITH READ ONLY] 选项解释  OR REPLACE ：若所创建的试图已经存在，ORACLE 自动重建该视图； FORCE ：不管基表是否存在 ORACLE 都会自动创建该视图； subquery ：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="oracle">
+<meta property="og:url" content="http://hydraone.github.io/2022/12/28/oracle/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="视图 创建或修改视图语法 1234CREATE [OR REPLACE] [FORCE] VIEW view_name AS subquery [WITH CHECK OPTION ] [WITH READ ONLY] 选项解释  OR REPLACE ：若所创建的试图已经存在，ORACLE 自动重建该视图； FORCE ：不管基表是否存在 ORACLE 都会自动创建该视图； subquery ：">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-12-28T14:20:58.000Z">
+<meta property="article:modified_time" content="2023-10-09T08:45:51.160Z">
+<meta property="article:author" content="开高达の汽车人">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>oracle - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"hydraone.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"WYl7MpEaCJwL3rsGGTy0JwaN-MdYXbMMI","app_key":"16xSs6RcLLaHfNeMbgKvTIAc","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>开高达の汽车人</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="oracle"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-12-28 22:20" pubdate>
+          星期三, 十二月 28日 2022, 10:20 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          3.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          29 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">oracle</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="视图">视图</h3>
+<p>创建或修改视图语法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">CREATE</span> [<span class="hljs-keyword">OR</span> REPLACE] [FORCE] <span class="hljs-keyword">VIEW</span> view_name <br><span class="hljs-keyword">AS</span> subquery <br>[<span class="hljs-keyword">WITH</span> <span class="hljs-keyword">CHECK</span> OPTION ] <br>[<span class="hljs-keyword">WITH</span> READ <span class="hljs-keyword">ONLY</span>]<br></code></pre></td></tr></table></figure>
+<p>选项解释</p>
+<ul>
+<li>OR REPLACE ：若所创建的试图已经存在，ORACLE 自动重建该视图；</li>
+<li>FORCE ：不管基表是否存在 ORACLE 都会自动创建该视图；</li>
+<li>subquery ：一条完整的 SELECT 语句，可以在该语句中定义别名；</li>
+<li>WITH CHECK OPTION ：插入或修改的数据行必须满足视图定义的约束；</li>
+<li>WITH READ ONLY ：该视图上不能进行任何 DML 操作。</li>
+</ul>
+<p>删除视图语法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">VIEW</span> view_name<br></code></pre></td></tr></table></figure>
+<h3 id="物化视图">物化视图</h3>
+<h4 id="什么是物化视图">什么是物化视图</h4>
+<p>视图是一个虚拟表（也可以认为是一条语句），基于它创建时指定的查询语句返回的结果集。每次访问它都会导致这个查询语句被执行一次。为了避免每次访问都执行这个查询，可以将这个查询结果集存储到一个物化视图（也叫实体化视图）。<br>
+物化视图与普通的视图相比的区别是物化视图是建立的副本，它类似于一张表，需要占用存储空间。而对一个化视图查询的执行效率与查询一个表是一样的。</p>
+<h4 id="创建物化视图语法">创建物化视图语法</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">CREATE</span> METERIALIZED <span class="hljs-keyword">VIEW</span> view_name<br>[BUILD IMMEDIATE <span class="hljs-operator">|</span> BUILD DEFERRED ]<br>REFRESH [FAST<span class="hljs-operator">|</span>COMPLETE<span class="hljs-operator">|</span>FORCE]<br>[<br><span class="hljs-keyword">ON</span> [<span class="hljs-keyword">COMMIT</span> <span class="hljs-operator">|</span>DEMAND ] <span class="hljs-operator">|</span> <span class="hljs-keyword">START</span> <span class="hljs-keyword">WITH</span> (start_time) NEXT<br>(next_time)<br>]<br><span class="hljs-keyword">AS</span><br>subquery<br></code></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>BUILD IMMEDIATE 是在创建物化视图的时候就生成数据</p>
+</li>
+<li>
+<p>BUILD DEFERRED 则在创建时不生成数据，以后根据需要再生成数据。<br>
+<strong>默认为 BUILD IMMEDIATE。</strong></p>
+</li>
+<li>
+<p>刷新（REFRESH）：指当基表发生了 DML 操作后，物化视图何时采用哪种方式和基表进行同步。</p>
+<p>REFRESH 后跟着指定的刷新方法有三种：FAST、COMPLETE、FORCE。FAST刷新采用增量刷新，只刷新自上次刷新以后进行的修改。COMPLETE 刷新对整个物化视图进行完全的刷新。如果选择 FORCE 方式，则 Oracle 在刷新时会去判断是否可以进行快速刷新，如果可以则采用 FAST 方式，否则采用 COMPLETE的方式。FORCE 是默认的方式。</p>
+<p>刷新的模式有两种：ON DEMAND 和 ON COMMIT。ON DEMAND 指需要手动刷新物化视图（默认）。ON COMMIT 指在基表发生 COMMIT 操作时自动刷新。</p>
+</li>
+</ul>
+<h3 id="序列">序列</h3>
+<h4 id="什么是序列">什么是序列</h4>
+<p>序列是 ORACLE 提供的用于产生一系列唯一数字的数据库对象。</p>
+<h4 id="创建与使用简单序列">创建与使用简单序列</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">create</span> sequence 序列名称<br></code></pre></td></tr></table></figure>
+<p>通过序列的伪列来访问序列的值</p>
+<ul>
+<li>NEXTVAL 返回序列的下一个值</li>
+<li>CURRVAL 返回序列的当前</li>
+</ul>
+<p><strong>注意</strong>：我们在刚建立序列后，无法提取当前值，只有先提取下一个值时才能再次提取当前值。<br>
+提取下一个值</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">select</span> 序列名称.nextval <span class="hljs-keyword">from</span> dual<br></code></pre></td></tr></table></figure>
+<p>提取当前值</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">select</span> 序列名称.currval <span class="hljs-keyword">from</span> dual<br></code></pre></td></tr></table></figure>
+<h4 id="创建复杂序列">创建复杂序列</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">CREATE</span> SEQUENCE sequence <span class="hljs-operator">/</span><span class="hljs-operator">/</span>创建序列名称<br>[INCREMENT <span class="hljs-keyword">BY</span> n] <span class="hljs-operator">/</span><span class="hljs-operator">/</span>递增的序列值是 n 如果 n 是正数就递增,如果是负数就递减 默<br>认是 <span class="hljs-number">1</span><br>[<span class="hljs-keyword">START</span> <span class="hljs-keyword">WITH</span> n] <span class="hljs-operator">/</span><span class="hljs-operator">/</span>开始的值,递增默认是 minvalue 递减是 maxvalue<br>[&#123;MAXVALUE n <span class="hljs-operator">|</span> NOMAXVALUE&#125;] <span class="hljs-operator">/</span><span class="hljs-operator">/</span>最大值<br>[&#123;MINVALUE n <span class="hljs-operator">|</span> NOMINVALUE&#125;] <span class="hljs-operator">/</span><span class="hljs-operator">/</span>最小值<br>[&#123;<span class="hljs-keyword">CYCLE</span> <span class="hljs-operator">|</span> NOCYCLE&#125;] <span class="hljs-operator">/</span><span class="hljs-operator">/</span>循环<span class="hljs-operator">/</span>不循环<br>[&#123;CACHE n <span class="hljs-operator">|</span> NOCACHE&#125;];<span class="hljs-operator">/</span><span class="hljs-operator">/</span>分配并存入到内存中<br></code></pre></td></tr></table></figure>
+<h3 id="同义词">同义词</h3>
+<h4 id="什么是同义词">什么是同义词</h4>
+<p>同义词实质上是指定方案对象的一个别名。通过屏蔽对象的名称和所有者以及对分布式数据库的远程对象提供位置透明性，同义词可以提供一定程度的安全性。同时，同义词的易用性较好，降低了数据库用户的 SQL 语句复杂度。同义词允许基对象重命名或者移动，这时，只需对同义词进行重定义，基于同义词的应用程序可以继续运行而无需修改。</p>
+<p>你可以创建公共同义词和私有同义词。其中，公共同义词属于 PUBLIC 特殊用户组，数据库的所有用户都能访问；而私有同义词包含在特定用户的方案中，只允许特定用户或者有基对象访问权限的用户进行访问。</p>
+<p>同义词本身不涉及安全，当你赋予一个同义词对象权限时，你实质上是在给同义词的基对象赋予权限，同义词只是基对象的一个别名。</p>
+<h4 id="创建与使用同义词">创建与使用同义词</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">create</span> [public] SYNONYM synooym <span class="hljs-keyword">for</span> object<br></code></pre></td></tr></table></figure>
+<p>其中 synonym 表示要创建的同义词的名称，object 表示表，视图，序列等我们要创建同义词的对象的名称。</p>
+<h3 id="索引">索引</h3>
+<h4 id="什么是索引">什么是索引</h4>
+<p>索引是用于加速数据存取的数据对象。合理的使用索引可以大大降低 I/O 次数,从而提高数据访问性能。</p>
+<p>索引是需要占据存储空间的，也可以理解为是一种特殊的数据。形式类似于下图的一棵“树”，而树的节点存储的就是每条记录的物理地址，也就是我们提到的伪列（ROWID）</p>
+<h4 id="普通索引">普通索引</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">create</span> index 索引名称 <span class="hljs-keyword">on</span> 表名(列名);<br></code></pre></td></tr></table></figure>
+<p><strong>eg:</strong> 我们经常要根据业主名称搜索业主信息，所以我们基于业主表的 name 字段来建立索引。语句如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">create</span> index index_owners_name <span class="hljs-keyword">on</span> OWNERS(name)<br></code></pre></td></tr></table></figure>
+<h4 id="唯一索引">唯一索引</h4>
+<p>如果我们需要在某个表某个列创建索引，而这列的值是不会重复的。这是我们可以创建唯一索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">create</span> <span class="hljs-keyword">unique</span> index 索引名称 <span class="hljs-keyword">on</span> 表名(列名);<br></code></pre></td></tr></table></figure>
+<h4 id="复合索引">复合索引</h4>
+<p>经常对固定某几列查询时，使用复合索引比分开建立索引效率更高</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">create</span> index 索引名称 <span class="hljs-keyword">on</span> 表名(列名,列名.....);<br></code></pre></td></tr></table></figure>
+<h4 id="反向键索引">反向键索引</h4>
+<p>当某个字段的值为连续增长的值，如果构建标准索引，会形成歪脖子树。这样会增加查询的层数，性能会下降。建立反向键索引，可以使索引的值变得不规则，从而使索引树能够均匀分布。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">create</span> index 索引名称 <span class="hljs-keyword">on</span> 表名(列名) reverse;<br></code></pre></td></tr></table></figure>
+<h4 id="位图索引">位图索引</h4>
+<p><strong>eg:</strong> 位图索引适合创建在低基数列上,位图索引不直接存储 ROWID，而是存储字节位到 ROWID 的映射<br>
+优点：减少响应时间，节省空间占用</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">create</span> bitmap index 索引名称 <span class="hljs-keyword">on</span> 表名(列名);<br></code></pre></td></tr></table></figure>
+<h3 id="常用语句">常用语句</h3>
+<h5 id="查看Oracle-死锁">查看Oracle 死锁</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">select</span> dba_.OWNER,<br>       lockobj.ORACLE_USERNAME,<br>       session_.sid,<br>       session_.serial#,<br>       logon_time,<br>       OBJECT_NAME,<br>       DECODE(BLOCK, <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;NO&#x27;</span>, <span class="hljs-string">&#x27;YES&#x27;</span>)                                       BLOCKER,<br>       DECODE(REQUEST, <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;NO&#x27;</span>, <span class="hljs-string">&#x27;YES&#x27;</span>)                                     WAITER,<br>       lockobj.LOCKED_MODE,<br>       lockobj.OS_USER_NAME,<br>       session_.PROGRAM,<br>       <span class="hljs-string">&#x27;ALTER SYSTEM KILL SESSION &#x27;&#x27;&#x27;</span> <span class="hljs-operator">||</span> session_.SID <span class="hljs-operator">||</span> <span class="hljs-string">&#x27;,&#x27;</span> <span class="hljs-operator">||</span> session_.SERIAL# <span class="hljs-operator">||</span> <span class="hljs-string">&#x27;&#x27;&#x27;&#x27;</span> FREESQL<br><span class="hljs-keyword">from</span> v$locked_object lockobj,<br>     v$session session_,<br>     DBA_OBJECTS dba_,<br>     V$LOCK lock_<br><span class="hljs-keyword">where</span> lockobj.session_id <span class="hljs-operator">=</span> session_.sid<br>  <span class="hljs-keyword">and</span> dba_.OBJECT_ID <span class="hljs-operator">=</span> lockobj.OBJECT_ID<br>  <span class="hljs-keyword">and</span> session_.SID <span class="hljs-operator">=</span> lock_.SID<br>  <span class="hljs-keyword">and</span> (REQUEST <span class="hljs-operator">&gt;</span> <span class="hljs-number">0</span> <span class="hljs-keyword">OR</span> BLOCK <span class="hljs-operator">&gt;</span> <span class="hljs-number">0</span>)<br><span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> session_.logon_time;<br></code></pre></td></tr></table></figure>
+<h5 id="查看Session正在执行的语句">查看Session正在执行的语句</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> sql_text<br><span class="hljs-keyword">FROM</span> v$sqltext a<br><span class="hljs-keyword">WHERE</span> (a.hash_value, a.address) <span class="hljs-keyword">IN</span><br>      (<span class="hljs-keyword">SELECT</span> DECODE(sql_hash_value, <span class="hljs-number">0</span>, prev_hash_value, sql_hash_value),<br>              DECODE(sql_hash_value, <span class="hljs-number">0</span>, prev_sql_addr, sql_address)<br>       <span class="hljs-keyword">FROM</span> v$session b<br>       <span class="hljs-keyword">where</span> SID <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;41&#x27;</span>)<br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> piece;<br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>oracle</div>
+      <div>http://hydraone.github.io/2022/12/28/oracle/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>开高达の汽车人</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年12月28日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/12/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="数据结构">
+                        <span class="hidden-mobile">数据结构</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.14.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.14.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"blog-hydraone.vercel.app","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10,"placeholder":"遗憾莫过于难忘你的背影，却找不到你来过的痕迹 ...","avatar":"retro","highlight":true,"avatarCDN":"","avatarForce":false,"requiredFields":[],"emojiCDN":null,"emojiMaps":null,"anonymous":null},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('mermaid' in window) {
+        mermaid.init();
+      }
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
